@@ -1,0 +1,12 @@
+[package]
+name = "pylon-gateway-protobuf"
+version = "0.1.0"
+authors = ["Spencer Sharkey <spencer@sf-n.com>"]
+edition = "2018"
+description = "Generated protobuf models and gRPC services for the Pylon Managed Gateway service"
+license = "MIT"
+
+[dependencies]
+prost = "0.6"
+prost-types = "0.6"
+tonic = "0.3"
