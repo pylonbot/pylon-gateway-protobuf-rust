@@ -232,48 +232,50 @@ pub struct VoiceStateData {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageData {
     #[prost(fixed64, tag = "1")]
+    pub id: u64,
+    #[prost(fixed64, tag = "2")]
     pub channel_id: u64,
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "3")]
     pub guild_id: ::std::option::Option<SnowflakeValue>,
-    #[prost(string, tag = "3")]
+    #[prost(string, tag = "4")]
     pub content: std::string::String,
-    #[prost(message, optional, tag = "4")]
-    pub timestamp: ::std::option::Option<::prost_types::Timestamp>,
     #[prost(message, optional, tag = "5")]
-    pub edited_timestamp: ::std::option::Option<::prost_types::Timestamp>,
+    pub timestamp: ::std::option::Option<::prost_types::Timestamp>,
     #[prost(message, optional, tag = "6")]
+    pub edited_timestamp: ::std::option::Option<::prost_types::Timestamp>,
+    #[prost(message, optional, tag = "7")]
     pub mention_roles: ::std::option::Option<SnowflakeListValue>,
-    #[prost(bool, tag = "7")]
-    pub tts: bool,
     #[prost(bool, tag = "8")]
+    pub tts: bool,
+    #[prost(bool, tag = "9")]
     pub mention_everyone: bool,
-    #[prost(message, repeated, tag = "9")]
-    pub attachments: ::std::vec::Vec<message_data::MessageAttachmentData>,
     #[prost(message, repeated, tag = "10")]
-    pub embeds: ::std::vec::Vec<message_data::MessageEmbedData>,
+    pub attachments: ::std::vec::Vec<message_data::MessageAttachmentData>,
     #[prost(message, repeated, tag = "11")]
-    pub mentions: ::std::vec::Vec<message_data::MessageMentionData>,
+    pub embeds: ::std::vec::Vec<message_data::MessageEmbedData>,
     #[prost(message, repeated, tag = "12")]
+    pub mentions: ::std::vec::Vec<message_data::MessageMentionData>,
+    #[prost(message, repeated, tag = "13")]
     pub reactions: ::std::vec::Vec<message_data::MessageReactionData>,
-    #[prost(bool, tag = "13")]
+    #[prost(bool, tag = "14")]
     pub pinned: bool,
-    #[prost(enumeration = "message_data::MessageType", tag = "14")]
+    #[prost(enumeration = "message_data::MessageType", tag = "15")]
     pub r#type: i32,
-    #[prost(message, repeated, tag = "15")]
+    #[prost(message, repeated, tag = "16")]
     pub mention_channels: ::std::vec::Vec<message_data::MessageMentionChannelData>,
-    #[prost(uint32, tag = "16")]
+    #[prost(uint32, tag = "17")]
     pub flags: u32,
-    #[prost(message, optional, tag = "17")]
-    pub activity: ::std::option::Option<message_data::MessageActivityData>,
     #[prost(message, optional, tag = "18")]
-    pub application: ::std::option::Option<message_data::MessageApplicationData>,
+    pub activity: ::std::option::Option<message_data::MessageActivityData>,
     #[prost(message, optional, tag = "19")]
-    pub message_reference: ::std::option::Option<message_data::MessageReferenceData>,
+    pub application: ::std::option::Option<message_data::MessageApplicationData>,
     #[prost(message, optional, tag = "20")]
-    pub author: ::std::option::Option<UserData>,
+    pub message_reference: ::std::option::Option<message_data::MessageReferenceData>,
     #[prost(message, optional, tag = "21")]
-    pub member: ::std::option::Option<MemberData>,
+    pub author: ::std::option::Option<UserData>,
     #[prost(message, optional, tag = "22")]
+    pub member: ::std::option::Option<MemberData>,
+    #[prost(message, optional, tag = "23")]
     pub webhook_id: ::std::option::Option<SnowflakeValue>,
 }
 pub mod message_data {
