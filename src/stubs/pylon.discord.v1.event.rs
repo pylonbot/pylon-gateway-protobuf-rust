@@ -159,40 +159,105 @@ pub mod message_update_event {
         pub tts: ::std::option::Option<bool>,
         #[prost(message, optional, tag = "8")]
         pub mention_everyone: ::std::option::Option<bool>,
-        #[prost(message, repeated, tag = "9")]
-        pub attachments: ::std::vec::Vec<super::super::model::message_data::MessageAttachmentData>,
-        #[prost(message, repeated, tag = "10")]
-        pub embeds: ::std::vec::Vec<super::super::model::message_data::MessageEmbedData>,
-        #[prost(message, repeated, tag = "11")]
-        pub mentions: ::std::vec::Vec<super::super::model::message_data::MessageMentionData>,
-        #[prost(message, repeated, tag = "12")]
-        pub reactions: ::std::vec::Vec<super::super::model::message_data::MessageReactionData>,
+        #[prost(message, optional, tag = "9")]
+        pub attachments: ::std::option::Option<payload_data::MessageAttachmentListValue>,
+        #[prost(message, optional, tag = "10")]
+        pub embeds: ::std::option::Option<payload_data::MessageEmbedListValue>,
+        #[prost(message, optional, tag = "11")]
+        pub mentions: ::std::option::Option<payload_data::MessageMentionListValue>,
+        #[prost(message, optional, tag = "12")]
+        pub reactions: ::std::option::Option<payload_data::MessageReactionListValue>,
         #[prost(message, optional, tag = "13")]
         pub pinned: ::std::option::Option<bool>,
-        #[prost(
-            enumeration = "super::super::model::message_data::MessageType",
-            tag = "14"
-        )]
-        pub r#type: i32,
-        #[prost(message, repeated, tag = "15")]
-        pub mention_channels:
-            ::std::vec::Vec<super::super::model::message_data::MessageMentionChannelData>,
+        #[prost(message, optional, tag = "14")]
+        pub r#type: ::std::option::Option<payload_data::MessageTypeValue>,
+        #[prost(message, optional, tag = "15")]
+        pub mention_channels: ::std::option::Option<payload_data::MessageMentionChannelListValue>,
         #[prost(message, optional, tag = "16")]
         pub flags: ::std::option::Option<u32>,
         #[prost(message, optional, tag = "17")]
-        pub activity: ::std::option::Option<super::super::model::message_data::MessageActivityData>,
+        pub activity: ::std::option::Option<payload_data::MessageActivityValue>,
         #[prost(message, optional, tag = "18")]
-        pub application:
-            ::std::option::Option<super::super::model::message_data::MessageApplicationData>,
+        pub application: ::std::option::Option<payload_data::MessageApplicationValue>,
         #[prost(message, optional, tag = "19")]
-        pub message_reference:
-            ::std::option::Option<super::super::model::message_data::MessageReferenceData>,
+        pub message_reference: ::std::option::Option<payload_data::MessageReferenceValue>,
         #[prost(message, optional, tag = "20")]
-        pub author: ::std::option::Option<super::super::model::UserData>,
+        pub author: ::std::option::Option<payload_data::MessageAuthorValue>,
         #[prost(message, optional, tag = "21")]
-        pub member: ::std::option::Option<super::super::model::MemberData>,
+        pub member: ::std::option::Option<payload_data::MessageMemberValue>,
         #[prost(message, optional, tag = "22")]
         pub webhook_id: ::std::option::Option<super::super::model::SnowflakeValue>,
+    }
+    pub mod payload_data {
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageAttachmentListValue {
+            #[prost(message, repeated, tag = "1")]
+            pub values:
+                ::std::vec::Vec<super::super::super::model::message_data::MessageAttachmentData>,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageEmbedListValue {
+            #[prost(message, repeated, tag = "1")]
+            pub values: ::std::vec::Vec<super::super::super::model::message_data::MessageEmbedData>,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageMentionListValue {
+            #[prost(message, repeated, tag = "1")]
+            pub values:
+                ::std::vec::Vec<super::super::super::model::message_data::MessageMentionData>,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageReactionListValue {
+            #[prost(message, repeated, tag = "1")]
+            pub values:
+                ::std::vec::Vec<super::super::super::model::message_data::MessageReactionData>,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageTypeValue {
+            #[prost(
+                enumeration = "super::super::super::model::message_data::MessageType",
+                tag = "1"
+            )]
+            pub value: i32,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageMentionChannelListValue {
+            #[prost(message, repeated, tag = "1")]
+            pub values: ::std::vec::Vec<
+                super::super::super::model::message_data::MessageMentionChannelData,
+            >,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageActivityValue {
+            #[prost(message, optional, tag = "1")]
+            pub value: ::std::option::Option<
+                super::super::super::model::message_data::MessageActivityData,
+            >,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageApplicationValue {
+            #[prost(message, optional, tag = "1")]
+            pub value: ::std::option::Option<
+                super::super::super::model::message_data::MessageApplicationData,
+            >,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageReferenceValue {
+            #[prost(message, optional, tag = "1")]
+            pub value: ::std::option::Option<
+                super::super::super::model::message_data::MessageReferenceData,
+            >,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageAuthorValue {
+            #[prost(message, optional, tag = "1")]
+            pub value: ::std::option::Option<super::super::super::model::UserData>,
+        }
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct MessageMemberValue {
+            #[prost(message, optional, tag = "1")]
+            pub value: ::std::option::Option<super::super::super::model::MemberData>,
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Payload {
