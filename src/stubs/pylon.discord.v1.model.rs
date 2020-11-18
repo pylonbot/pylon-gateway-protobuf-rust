@@ -630,24 +630,60 @@ pub mod webhook_data {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InviteData {
-    #[prost(fixed64, tag = "1")]
-    pub guild_id: u64,
-    #[prost(fixed64, tag = "2")]
-    pub channel_id: u64,
-    #[prost(string, tag = "3")]
+    #[prost(string, tag = "1")]
     pub code: std::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub guild: ::std::option::Option<invite_data::InviteGuildData>,
+    #[prost(message, optional, tag = "3")]
+    pub channel: ::std::option::Option<invite_data::InviteChannelData>,
     #[prost(message, optional, tag = "4")]
-    pub created_at: ::std::option::Option<::prost_types::Timestamp>,
-    #[prost(message, optional, tag = "5")]
     pub inviter: ::std::option::Option<UserData>,
-    #[prost(uint64, tag = "6")]
-    pub max_age: u64,
-    #[prost(uint64, tag = "7")]
-    pub max_uses: u64,
-    #[prost(bool, tag = "8")]
-    pub temporary: bool,
-    #[prost(uint64, tag = "9")]
-    pub uses: u64,
+    #[prost(message, optional, tag = "5")]
+    pub target_user: ::std::option::Option<UserData>,
+    #[prost(enumeration = "invite_data::InviteTargetUserType", tag = "6")]
+    pub target_user_type: i32,
+    #[prost(message, optional, tag = "7")]
+    pub approximate_presence_count: ::std::option::Option<u32>,
+    #[prost(message, optional, tag = "8")]
+    pub approximate_member_count: ::std::option::Option<u32>,
+}
+pub mod invite_data {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InviteGuildData {
+        #[prost(fixed64, tag = "1")]
+        pub id: u64,
+        #[prost(string, tag = "2")]
+        pub name: std::string::String,
+        #[prost(message, optional, tag = "3")]
+        pub splash: ::std::option::Option<::std::string::String>,
+        #[prost(message, optional, tag = "4")]
+        pub banner: ::std::option::Option<::std::string::String>,
+        #[prost(message, optional, tag = "5")]
+        pub description: ::std::option::Option<::std::string::String>,
+        #[prost(message, optional, tag = "6")]
+        pub icon: ::std::option::Option<::std::string::String>,
+        #[prost(string, repeated, tag = "7")]
+        pub features: ::std::vec::Vec<std::string::String>,
+        #[prost(uint32, tag = "8")]
+        pub verification_level: u32,
+        #[prost(message, optional, tag = "9")]
+        pub vanity_url_code: ::std::option::Option<::std::string::String>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InviteChannelData {
+        #[prost(fixed64, tag = "1")]
+        pub id: u64,
+        #[prost(string, tag = "2")]
+        pub name: std::string::String,
+        #[prost(enumeration = "super::channel_data::ChannelType", tag = "3")]
+        pub r#type: i32,
+    }
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum InviteTargetUserType {
+        Unknown = 0,
+        Stream = 1,
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GuildBanData {
