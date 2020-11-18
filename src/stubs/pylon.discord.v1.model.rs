@@ -692,27 +692,3 @@ pub struct GuildBanData {
     #[prost(message, optional, tag = "2")]
     pub user: ::std::option::Option<UserData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ImageData {
-    #[prost(enumeration = "image_data::ImageDataType", tag = "1")]
-    pub r#type: i32,
-    #[prost(oneof = "image_data::Data", tags = "2, 3")]
-    pub data: ::std::option::Option<image_data::Data>,
-}
-pub mod image_data {
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-    #[repr(i32)]
-    pub enum ImageDataType {
-        Unknown = 0,
-        Jpeg = 1,
-        Png = 2,
-        Gif = 3,
-    }
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Data {
-        #[prost(string, tag = "2")]
-        Base64(std::string::String),
-        #[prost(bytes, tag = "3")]
-        Bytes(std::vec::Vec<u8>),
-    }
-}
