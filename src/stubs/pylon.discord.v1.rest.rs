@@ -26,13 +26,13 @@ pub struct ModifyGuildRequest {
     #[prost(message, optional, tag = "7")]
     pub afk_timeout: ::std::option::Option<u32>,
     #[prost(message, optional, tag = "8")]
-    pub icon: ::std::option::Option<::std::string::String>,
+    pub icon: ::std::option::Option<::std::vec::Vec<u8>>,
     #[prost(message, optional, tag = "9")]
     pub owner_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(message, optional, tag = "10")]
-    pub splash: ::std::option::Option<::std::string::String>,
+    pub splash: ::std::option::Option<::std::vec::Vec<u8>>,
     #[prost(message, optional, tag = "11")]
-    pub banner: ::std::option::Option<::std::string::String>,
+    pub banner: ::std::option::Option<::std::vec::Vec<u8>>,
     #[prost(message, optional, tag = "12")]
     pub system_channel_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(message, optional, tag = "13")]
@@ -40,7 +40,7 @@ pub struct ModifyGuildRequest {
     #[prost(message, optional, tag = "14")]
     pub public_updates_channel_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(message, optional, tag = "15")]
-    pub preferred_locale: ::std::option::Option<super::model::SnowflakeValue>,
+    pub preferred_locale: ::std::option::Option<::std::string::String>,
     #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
@@ -1338,7 +1338,7 @@ pub struct CreateGuildEmojiRequest {
     #[prost(string, tag = "1")]
     pub name: std::string::String,
     #[prost(message, optional, tag = "2")]
-    pub image: ::std::option::Option<super::model::ImageData>,
+    pub image: ::std::option::Option<::std::vec::Vec<u8>>,
     #[prost(message, optional, tag = "3")]
     pub roles: ::std::option::Option<super::model::SnowflakeListValue>,
     #[prost(message, optional, tag = "100")]
@@ -1474,7 +1474,7 @@ pub struct ModifyCurrentUserRequest {
     #[prost(message, optional, tag = "1")]
     pub username: ::std::option::Option<::std::string::String>,
     #[prost(message, optional, tag = "2")]
-    pub avatar: ::std::option::Option<super::model::ImageData>,
+    pub avatar: ::std::option::Option<::std::vec::Vec<u8>>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyCurrentUserResponse {
