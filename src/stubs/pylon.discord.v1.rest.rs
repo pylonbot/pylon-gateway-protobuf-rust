@@ -41,7 +41,7 @@ pub struct ModifyGuildRequest {
     pub public_updates_channel_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(message, optional, tag = "15")]
     pub preferred_locale: ::std::option::Option<super::model::SnowflakeValue>,
-    #[prost(message, optional, tag = "16")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -88,7 +88,7 @@ pub struct CreateGuildChannelRequest {
     pub parent_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(message, optional, tag = "10")]
     pub nsfw: ::std::option::Option<bool>,
-    #[prost(message, optional, tag = "11")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -195,7 +195,7 @@ pub struct ModifyGuildMemberRequest {
     pub deaf: ::std::option::Option<bool>,
     #[prost(message, optional, tag = "6")]
     pub channel_id: ::std::option::Option<super::model::SnowflakeValue>,
-    #[prost(message, optional, tag = "7")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -241,7 +241,7 @@ pub struct AddGuildMemberRoleRequest {
     pub user_id: u64,
     #[prost(fixed64, tag = "2")]
     pub role_id: u64,
-    #[prost(message, optional, tag = "3")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -266,7 +266,7 @@ pub struct RemoveGuildMemberRoleRequest {
     pub user_id: u64,
     #[prost(fixed64, tag = "2")]
     pub role_id: u64,
-    #[prost(message, optional, tag = "3")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -289,7 +289,7 @@ pub mod remove_guild_member_role_response {
 pub struct RemoveGuildMemberRequest {
     #[prost(fixed64, tag = "1")]
     pub user_id: u64,
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -366,7 +366,7 @@ pub struct CreateGuildBanRequest {
     pub user_id: u64,
     #[prost(message, optional, tag = "2")]
     pub delete_message_days: ::std::option::Option<u32>,
-    #[prost(message, optional, tag = "3")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -389,7 +389,7 @@ pub mod create_guild_ban_response {
 pub struct RemoveGuildBanRequest {
     #[prost(fixed64, tag = "1")]
     pub user_id: u64,
-    #[prost(message, optional, tag = "3")]
+    #[prost(message, optional, tag = "100")]
     pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -420,6 +420,8 @@ pub struct CreateGuildRoleRequest {
     pub hoist: ::std::option::Option<bool>,
     #[prost(message, optional, tag = "5")]
     pub mentionable: ::std::option::Option<bool>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGuildRoleResponse {
@@ -494,6 +496,8 @@ pub struct ModifyGuildRoleRequest {
     pub hoist: ::std::option::Option<bool>,
     #[prost(message, optional, tag = "6")]
     pub mentionable: ::std::option::Option<bool>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyGuildRoleResponse {
@@ -520,6 +524,8 @@ pub mod modify_guild_role_response {
 pub struct DeleteGuildRoleRequest {
     #[prost(fixed64, tag = "1")]
     pub role_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGuildRoleResponse {
@@ -568,6 +574,8 @@ pub struct BeginGuildPruneRequest {
     pub include_roles: ::std::option::Option<super::model::SnowflakeListValue>,
     #[prost(message, optional, tag = "3")]
     pub compute_prune_count: ::std::option::Option<bool>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginGuildPruneResponse {
@@ -656,6 +664,8 @@ pub struct ModifyChannelRequest {
         ::std::option::Option<modify_channel_request::ChannelPermissionOverwritesValue>,
     #[prost(message, optional, tag = "11")]
     pub parent_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 pub mod modify_channel_request {
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -690,6 +700,8 @@ pub mod modify_channel_response {
 pub struct DeleteChannelRequest {
     #[prost(fixed64, tag = "1")]
     pub channel_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelResponse {
@@ -970,6 +982,8 @@ pub struct DeleteMessageRequest {
     pub channel_id: u64,
     #[prost(fixed64, tag = "2")]
     pub message_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMessageResponse {
@@ -993,6 +1007,8 @@ pub struct BulkDeleteMessagesRequest {
     pub channel_id: u64,
     #[prost(fixed64, repeated, packed = "false", tag = "2")]
     pub message_ids: ::std::vec::Vec<u64>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkDeleteMessagesResponse {
@@ -1025,6 +1041,8 @@ pub struct EditChannelPermissionsRequest {
         tag = "5"
     )]
     pub r#type: i32,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EditChannelPermissionsResponse {
@@ -1082,9 +1100,13 @@ pub struct CreateChannelInviteRequest {
     pub unique: ::std::option::Option<bool>,
     #[prost(message, optional, tag = "6")]
     pub target_user: ::std::option::Option<super::model::SnowflakeValue>,
-    /// todo: enum
-    #[prost(message, optional, tag = "7")]
-    pub target_user_type: ::std::option::Option<u32>,
+    #[prost(
+        enumeration = "super::model::invite_data::InviteTargetUserType",
+        tag = "7"
+    )]
+    pub target_user_type: i32,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelInviteResponse {
@@ -1113,6 +1135,8 @@ pub struct DeleteChannelPermissionRequest {
     pub channel_id: u64,
     #[prost(fixed64, tag = "2")]
     pub overwrite_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelPermissionResponse {
@@ -1213,6 +1237,8 @@ pub struct AddPinnedChannelMessageRequest {
     pub channel_id: u64,
     #[prost(fixed64, tag = "2")]
     pub message_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPinnedChannelMessageResponse {
@@ -1236,6 +1262,8 @@ pub struct DeletePinnedChannelMessageRequest {
     pub channel_id: u64,
     #[prost(fixed64, tag = "2")]
     pub message_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePinnedChannelMessageResponse {
@@ -1313,6 +1341,8 @@ pub struct CreateGuildEmojiRequest {
     pub image: ::std::option::Option<super::model::ImageData>,
     #[prost(message, optional, tag = "3")]
     pub roles: ::std::option::Option<super::model::SnowflakeListValue>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGuildEmojiResponse {
@@ -1343,6 +1373,8 @@ pub struct ModifyGuildEmojiRequest {
     pub name: ::std::option::Option<::std::string::String>,
     #[prost(message, optional, tag = "3")]
     pub roles: ::std::option::Option<super::model::SnowflakeListValue>,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyGuildEmojiResponse {
@@ -1369,6 +1401,8 @@ pub mod modify_guild_emoji_response {
 pub struct DeleteGuildEmojiRequest {
     #[prost(fixed64, tag = "1")]
     pub emoji_id: u64,
+    #[prost(message, optional, tag = "100")]
+    pub audit_log_reason: ::std::option::Option<::std::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGuildEmojiResponse {

@@ -442,7 +442,37 @@ pub struct InviteCreateEvent {
     #[prost(message, optional, tag = "1")]
     pub scope: ::std::option::Option<EventScope>,
     #[prost(message, optional, tag = "2")]
-    pub payload: ::std::option::Option<super::model::InviteData>,
+    pub payload: ::std::option::Option<invite_create_event::PayloadData>,
+}
+pub mod invite_create_event {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct PayloadData {
+        #[prost(fixed64, tag = "1")]
+        pub channel_id: u64,
+        #[prost(string, tag = "2")]
+        pub code: std::string::String,
+        #[prost(message, optional, tag = "3")]
+        pub created_at: ::std::option::Option<::prost_types::Timestamp>,
+        #[prost(message, optional, tag = "4")]
+        pub guild_id: ::std::option::Option<super::super::model::SnowflakeValue>,
+        #[prost(message, optional, tag = "5")]
+        pub inviter: ::std::option::Option<super::super::model::UserData>,
+        #[prost(uint64, tag = "6")]
+        pub max_age: u64,
+        #[prost(uint64, tag = "7")]
+        pub max_uses: u64,
+        #[prost(message, optional, tag = "8")]
+        pub target_user: ::std::option::Option<super::super::model::UserData>,
+        #[prost(
+            enumeration = "super::super::model::invite_data::InviteTargetUserType",
+            tag = "9"
+        )]
+        pub target_user_type: i32,
+        #[prost(bool, tag = "10")]
+        pub temporary: bool,
+        #[prost(uint64, tag = "11")]
+        pub uses: u64,
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InviteDeleteEvent {
