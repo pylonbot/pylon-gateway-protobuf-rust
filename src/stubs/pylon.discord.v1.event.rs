@@ -129,7 +129,7 @@ pub struct MessageCreateEvent {
     #[prost(message, optional, tag = "1")]
     pub scope: ::std::option::Option<EventScope>,
     #[prost(message, optional, tag = "2")]
-    pub message: ::std::option::Option<super::model::MessageData>,
+    pub message_data: ::std::option::Option<super::model::MessageData>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageUpdateEvent {
