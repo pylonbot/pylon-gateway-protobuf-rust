@@ -1,4 +1,101 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EventEnvelope {
+    #[prost(message, optional, tag = "1")]
+    pub header: ::std::option::Option<event_envelope::HeaderData>,
+    #[prost(
+        oneof = "event_envelope::EventData",
+        tags = "2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37"
+    )]
+    pub event_data: ::std::option::Option<event_envelope::EventData>,
+}
+pub mod event_envelope {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct HeaderData {
+        #[prost(uint64, tag = "1")]
+        pub seq: u64,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum EventData {
+        #[prost(message, tag = "2")]
+        GuildCreateEvent(super::GuildCreateEvent),
+        #[prost(message, tag = "3")]
+        GuildUpdateEvent(super::GuildUpdateEvent),
+        #[prost(message, tag = "4")]
+        GuildDeleteEvent(super::GuildDeleteEvent),
+        #[prost(message, tag = "5")]
+        PresenceUpdateEvent(super::PresenceUpdateEvent),
+        #[prost(message, tag = "6")]
+        GuildMemberAddEvent(super::GuildMemberAddEvent),
+        #[prost(message, tag = "7")]
+        GuildMemberUpdateEvent(super::GuildMemberUpdateEvent),
+        #[prost(message, tag = "8")]
+        GuildMemberRemoveEvent(super::GuildMemberRemoveEvent),
+        #[prost(message, tag = "9")]
+        ChannelCreateEvent(super::ChannelCreateEvent),
+        #[prost(message, tag = "10")]
+        ChannelUpdateEvent(super::ChannelUpdateEvent),
+        #[prost(message, tag = "11")]
+        ChannelDeleteEvent(super::ChannelDeleteEvent),
+        #[prost(message, tag = "12")]
+        ChannelPinsUpdateEvent(super::ChannelPinsUpdateEvent),
+        #[prost(message, tag = "13")]
+        GuildRoleCreateEvent(super::GuildRoleCreateEvent),
+        #[prost(message, tag = "14")]
+        GuildRoleUpdateEvent(super::GuildRoleUpdateEvent),
+        #[prost(message, tag = "15")]
+        GuildRoleDeleteEvent(super::GuildRoleDeleteEvent),
+        #[prost(message, tag = "16")]
+        MessageCreateEvent(super::MessageCreateEvent),
+        #[prost(message, tag = "17")]
+        MessageUpdateEvent(super::MessageUpdateEvent),
+        #[prost(message, tag = "18")]
+        MessageDeleteEvent(super::MessageDeleteEvent),
+        #[prost(message, tag = "19")]
+        MessageDeleteBulkEvent(super::MessageDeleteBulkEvent),
+        #[prost(message, tag = "20")]
+        MessageReactionAddEvent(super::MessageReactionAddEvent),
+        #[prost(message, tag = "21")]
+        MessageReactionRemoveEvent(super::MessageReactionRemoveEvent),
+        #[prost(message, tag = "22")]
+        MessageReactionRemoveAllEvent(super::MessageReactionRemoveAllEvent),
+        #[prost(message, tag = "23")]
+        MessageReactionRemoveEmojiEvent(super::MessageReactionRemoveEmojiEvent),
+        #[prost(message, tag = "24")]
+        TypingStartEvent(super::TypingStartEvent),
+        #[prost(message, tag = "25")]
+        VoiceStateUpdateEvent(super::VoiceStateUpdateEvent),
+        #[prost(message, tag = "26")]
+        VoiceServerUpdateEvent(super::VoiceServerUpdateEvent),
+        #[prost(message, tag = "27")]
+        InviteCreateEvent(super::InviteCreateEvent),
+        #[prost(message, tag = "28")]
+        InviteDeleteEvent(super::InviteDeleteEvent),
+        #[prost(message, tag = "29")]
+        GuildBanAddEvent(super::GuildBanAddEvent),
+        #[prost(message, tag = "30")]
+        GuildBanRemoveEvent(super::GuildBanRemoveEvent),
+        #[prost(message, tag = "31")]
+        GuildEmojisUpdateEvent(super::GuildEmojisUpdateEvent),
+        #[prost(message, tag = "32")]
+        GuildIntegrationsUpdateEvent(super::GuildIntegrationsUpdateEvent),
+        #[prost(message, tag = "33")]
+        WebhooksUpdateEvent(super::WebhooksUpdateEvent),
+        #[prost(message, tag = "34")]
+        IntegrationCreateEvent(super::IntegrationCreateEvent),
+        #[prost(message, tag = "35")]
+        IntegrationUpdateEvent(super::IntegrationUpdateEvent),
+        #[prost(message, tag = "36")]
+        IntegrationDeleteEvent(super::IntegrationDeleteEvent),
+        #[prost(message, tag = "37")]
+        InteractionCreateEvent(super::InteractionCreateEvent),
+    }
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EventEnvelopeAck {
+    #[prost(uint64, tag = "1")]
+    pub seq: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventScope {
     #[prost(fixed64, tag = "1")]
     pub bot_id: u64,
