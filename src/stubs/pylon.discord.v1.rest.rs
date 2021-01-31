@@ -1,11 +1,70 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestError {
-    #[prost(uint32, tag = "1")]
-    pub status: u32,
-    #[prost(uint32, tag = "2")]
-    pub code: u32,
-    #[prost(string, tag = "3")]
-    pub message: std::string::String,
+    #[prost(oneof = "rest_error::ErrorType", tags = "1, 2, 3, 4, 5")]
+    pub error_type: ::std::option::Option<rest_error::ErrorType>,
+}
+pub mod rest_error {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct UnknownError {
+        #[prost(uint32, tag = "1")]
+        pub http_status: u32,
+        #[prost(uint32, tag = "2")]
+        pub code: u32,
+        #[prost(string, tag = "3")]
+        pub message: std::string::String,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ValidationError {
+        #[prost(string, tag = "1")]
+        pub message: std::string::String,
+        #[prost(message, repeated, tag = "2")]
+        pub fields: ::std::vec::Vec<validation_error::Field>,
+    }
+    pub mod validation_error {
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct Field {
+            #[prost(string, tag = "1")]
+            pub path: std::string::String,
+            #[prost(string, tag = "2")]
+            pub code: std::string::String,
+            #[prost(string, tag = "3")]
+            pub message: std::string::String,
+        }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ResourceNotFound {
+        #[prost(uint32, tag = "1")]
+        pub code: u32,
+        #[prost(string, tag = "2")]
+        pub message: std::string::String,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct AccessDenied {
+        #[prost(uint32, tag = "1")]
+        pub code: u32,
+        #[prost(string, tag = "2")]
+        pub message: std::string::String,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct RateLimited {
+        #[prost(bool, tag = "1")]
+        pub global: bool,
+        #[prost(uint32, tag = "2")]
+        pub retry_at: u32,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ErrorType {
+        #[prost(message, tag = "1")]
+        UnknownError(UnknownError),
+        #[prost(message, tag = "2")]
+        ValidationError(ValidationError),
+        #[prost(message, tag = "3")]
+        ResourceNotFound(ResourceNotFound),
+        #[prost(message, tag = "4")]
+        AccessDenied(AccessDenied),
+        #[prost(message, tag = "5")]
+        RateLimited(RateLimited),
+    }
 }
 // Modify Guild
 
