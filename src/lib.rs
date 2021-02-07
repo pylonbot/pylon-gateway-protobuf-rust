@@ -8,6 +8,9 @@ pub mod discord {
         pub mod event {
             include!("stubs/pylon.discord.v1.event.rs");
         }
+        pub mod gateway {
+            include!("stubs/pylon.discord.v1.gateway.rs");
+        }
         pub mod model {
             include!("stubs/pylon.discord.v1.model.rs");
         }
