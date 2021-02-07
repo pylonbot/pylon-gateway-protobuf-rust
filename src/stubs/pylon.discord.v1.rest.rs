@@ -776,6 +776,68 @@ pub mod delete_channel_response {
         Data(()),
     }
 }
+// Get Channel Messages
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetChannelMessagesRequest {
+    #[prost(fixed64, tag = "1")]
+    pub channel_id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub around: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(message, optional, tag = "3")]
+    pub before: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(message, optional, tag = "4")]
+    pub after: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(uint32, tag = "5")]
+    pub limit: u32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetChannelMessagesResponse {
+    #[prost(oneof = "get_channel_messages_response::Response", tags = "1, 2")]
+    pub response: ::std::option::Option<get_channel_messages_response::Response>,
+}
+pub mod get_channel_messages_response {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Data {
+        #[prost(message, repeated, tag = "1")]
+        pub messages: ::std::vec::Vec<super::super::model::MessageData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(Data),
+    }
+}
+// Get Channel Message
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetChannelMessageRequest {
+    #[prost(fixed64, tag = "1")]
+    pub channel_id: u64,
+    #[prost(fixed64, tag = "2")]
+    pub message_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetChannelMessageResponse {
+    #[prost(oneof = "get_channel_message_response::Response", tags = "1, 2")]
+    pub response: ::std::option::Option<get_channel_message_response::Response>,
+}
+pub mod get_channel_message_response {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Data {
+        #[prost(message, optional, tag = "1")]
+        pub message: ::std::option::Option<super::super::model::MessageData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(Data),
+    }
+}
 // Create Message
 
 #[derive(Clone, PartialEq, ::prost::Message)]

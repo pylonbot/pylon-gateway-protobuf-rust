@@ -6956,3 +6956,361 @@ pub mod gateway_rest_server {
         const NAME: &'static str = "pylon.gateway.v1.service.GatewayRest";
     }
 }
+#[doc = r" Generated client implementations."]
+pub mod gateway_client {
+    #![allow(unused_variables, dead_code, missing_docs)]
+    use tonic::codegen::*;
+    pub struct GatewayClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl GatewayClient<tonic::transport::Channel> {
+        #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: std::convert::TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> GatewayClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::Error: Into<StdError>,
+        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
+            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
+            Self { inner }
+        }
+        pub async fn update_voice_state(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::gateway::UpdateVoiceStateRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::gateway::UpdateVoiceStateResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.Gateway/UpdateVoiceState",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn update_status(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::gateway::UpdateStatusRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::UpdateStatusResponse>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.Gateway/UpdateStatus",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn find_user_mutual_guilds(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::gateway::GetUserMutualGuildsRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::gateway::GetUserMutualGuildsResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.Gateway/FindUserMutualGuilds",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn find_emoji(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::gateway::FindEmojiRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::FindEmojiResponse>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/pylon.gateway.v1.service.Gateway/FindEmoji");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+    }
+    impl<T: Clone> Clone for GatewayClient<T> {
+        fn clone(&self) -> Self {
+            Self {
+                inner: self.inner.clone(),
+            }
+        }
+    }
+    impl<T> std::fmt::Debug for GatewayClient<T> {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "GatewayClient {{ ... }}")
+        }
+    }
+}
+#[doc = r" Generated server implementations."]
+pub mod gateway_server {
+    #![allow(unused_variables, dead_code, missing_docs)]
+    use tonic::codegen::*;
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with GatewayServer."]
+    #[async_trait]
+    pub trait Gateway: Send + Sync + 'static {
+        async fn update_voice_state(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::gateway::UpdateVoiceStateRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::gateway::UpdateVoiceStateResponse,
+            >,
+            tonic::Status,
+        >;
+        async fn update_status(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::gateway::UpdateStatusRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::UpdateStatusResponse>,
+            tonic::Status,
+        >;
+        async fn find_user_mutual_guilds(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::gateway::GetUserMutualGuildsRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::gateway::GetUserMutualGuildsResponse,
+            >,
+            tonic::Status,
+        >;
+        async fn find_emoji(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::gateway::FindEmojiRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::FindEmojiResponse>,
+            tonic::Status,
+        >;
+    }
+    #[derive(Debug)]
+    pub struct GatewayServer<T: Gateway> {
+        inner: _Inner<T>,
+    }
+    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    impl<T: Gateway> GatewayServer<T> {
+        pub fn new(inner: T) -> Self {
+            let inner = Arc::new(inner);
+            let inner = _Inner(inner, None);
+            Self { inner }
+        }
+        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
+            let inner = Arc::new(inner);
+            let inner = _Inner(inner, Some(interceptor.into()));
+            Self { inner }
+        }
+    }
+    impl<T, B> Service<http::Request<B>> for GatewayServer<T>
+    where
+        T: Gateway,
+        B: HttpBody + Send + Sync + 'static,
+        B::Error: Into<StdError> + Send + 'static,
+    {
+        type Response = http::Response<tonic::body::BoxBody>;
+        type Error = Never;
+        type Future = BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+            Poll::Ready(Ok(()))
+        }
+        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+            let inner = self.inner.clone();
+            match req.uri().path() {
+                "/pylon.gateway.v1.service.Gateway/UpdateVoiceState" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateVoiceStateSvc<T: Gateway>(pub Arc<T>);
+                    impl < T : Gateway > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: gateway :: UpdateVoiceStateRequest > for UpdateVoiceStateSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: gateway :: UpdateVoiceStateResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: gateway :: UpdateVoiceStateRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . update_voice_state (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = UpdateVoiceStateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.Gateway/UpdateStatus" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdateStatusSvc<T: Gateway>(pub Arc<T>);
+                    impl<T: Gateway>
+                        tonic::server::UnaryService<
+                            super::super::super::super::discord::v1::gateway::UpdateStatusRequest,
+                        > for UpdateStatusSvc<T>
+                    {
+                        type Response =
+                            super::super::super::super::discord::v1::gateway::UpdateStatusResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: gateway :: UpdateStatusRequest >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).update_status(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = UpdateStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.Gateway/FindUserMutualGuilds" => {
+                    #[allow(non_camel_case_types)]
+                    struct FindUserMutualGuildsSvc<T: Gateway>(pub Arc<T>);
+                    impl < T : Gateway > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: gateway :: GetUserMutualGuildsRequest > for FindUserMutualGuildsSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: gateway :: GetUserMutualGuildsResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: gateway :: GetUserMutualGuildsRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . find_user_mutual_guilds (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = FindUserMutualGuildsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.Gateway/FindEmoji" => {
+                    #[allow(non_camel_case_types)]
+                    struct FindEmojiSvc<T: Gateway>(pub Arc<T>);
+                    impl<T: Gateway>
+                        tonic::server::UnaryService<
+                            super::super::super::super::discord::v1::gateway::FindEmojiRequest,
+                        > for FindEmojiSvc<T>
+                    {
+                        type Response =
+                            super::super::super::super::discord::v1::gateway::FindEmojiResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::super::super::super::discord::v1::gateway::FindEmojiRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).find_emoji(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = FindEmojiSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                _ => Box::pin(async move {
+                    Ok(http::Response::builder()
+                        .status(200)
+                        .header("grpc-status", "12")
+                        .body(tonic::body::BoxBody::empty())
+                        .unwrap())
+                }),
+            }
+        }
+    }
+    impl<T: Gateway> Clone for GatewayServer<T> {
+        fn clone(&self) -> Self {
+            let inner = self.inner.clone();
+            Self { inner }
+        }
+    }
+    impl<T: Gateway> Clone for _Inner<T> {
+        fn clone(&self) -> Self {
+            Self(self.0.clone(), self.1.clone())
+        }
+    }
+    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "{:?}", self.0)
+        }
+    }
+    impl<T: Gateway> tonic::transport::NamedService for GatewayServer<T> {
+        const NAME: &'static str = "pylon.gateway.v1.service.Gateway";
+    }
+}
