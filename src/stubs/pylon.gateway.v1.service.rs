@@ -145,7 +145,31 @@ pub mod gateway_cache_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = " Guild Member Properties"]
+        #[doc = " Guild Member Presence"]
+        pub async fn get_guild_member_presence(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::cache::GetGuildMemberPresenceRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::cache::GetGuildMemberPresenceResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayCache/GetGuildMemberPresence",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = " Guild Member Roles"]
         pub async fn list_guild_roles(
             &mut self,
             request: impl tonic::IntoRequest<
@@ -377,7 +401,19 @@ pub mod gateway_cache_server {
             tonic::Response<super::super::super::super::discord::v1::cache::GetGuildMemberResponse>,
             tonic::Status,
         >;
-        #[doc = " Guild Member Properties"]
+        #[doc = " Guild Member Presence"]
+        async fn get_guild_member_presence(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::cache::GetGuildMemberPresenceRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::cache::GetGuildMemberPresenceResponse,
+            >,
+            tonic::Status,
+        >;
+        #[doc = " Guild Member Roles"]
         async fn list_guild_roles(
             &self,
             request: tonic::Request<
@@ -635,6 +671,26 @@ pub mod gateway_cache_server {
                         let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = GetGuildMemberSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayCache/GetGuildMemberPresence" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetGuildMemberPresenceSvc<T: GatewayCache>(pub Arc<T>);
+                    impl < T : GatewayCache > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: cache :: GetGuildMemberPresenceRequest > for GetGuildMemberPresenceSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: cache :: GetGuildMemberPresenceResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: cache :: GetGuildMemberPresenceRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . get_guild_member_presence (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = GetGuildMemberPresenceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = if let Some(interceptor) = interceptor {
                             tonic::server::Grpc::with_interceptor(codec, interceptor)
