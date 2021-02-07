@@ -4102,6 +4102,52 @@ pub mod gateway_rest_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        pub async fn get_channel_messages(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::rest::GetChannelMessagesRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::GetChannelMessagesResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/GetChannelMessages",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn get_channel_message(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::rest::GetChannelMessageRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::GetChannelMessageResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/GetChannelMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
         pub async fn create_message(
             &mut self,
             request: impl tonic::IntoRequest<
@@ -4995,6 +5041,28 @@ pub mod gateway_rest_server {
             >,
         ) -> Result<
             tonic::Response<super::super::super::super::discord::v1::rest::DeleteChannelResponse>,
+            tonic::Status,
+        >;
+        async fn get_channel_messages(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::rest::GetChannelMessagesRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::GetChannelMessagesResponse,
+            >,
+            tonic::Status,
+        >;
+        async fn get_channel_message(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::rest::GetChannelMessageRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::GetChannelMessageResponse,
+            >,
             tonic::Status,
         >;
         async fn create_message(
@@ -6022,6 +6090,61 @@ pub mod gateway_rest_server {
                         let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = DeleteChannelSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/GetChannelMessages" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetChannelMessagesSvc<T: GatewayRest>(pub Arc<T>);
+                    impl < T : GatewayRest > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: rest :: GetChannelMessagesRequest > for GetChannelMessagesSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: rest :: GetChannelMessagesResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: GetChannelMessagesRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . get_channel_messages (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = GetChannelMessagesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/GetChannelMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetChannelMessageSvc<T: GatewayRest>(pub Arc<T>);
+                    impl<T: GatewayRest>
+                        tonic::server::UnaryService<
+                            super::super::super::super::discord::v1::rest::GetChannelMessageRequest,
+                        > for GetChannelMessageSvc<T>
+                    {
+                        type Response = super :: super :: super :: super :: discord :: v1 :: rest :: GetChannelMessageResponse ;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: GetChannelMessageRequest >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).get_channel_message(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = GetChannelMessageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = if let Some(interceptor) = interceptor {
                             tonic::server::Grpc::with_interceptor(codec, interceptor)
