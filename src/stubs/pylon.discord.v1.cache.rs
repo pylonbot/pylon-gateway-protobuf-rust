@@ -54,6 +54,18 @@ pub struct GetGuildMemberResponse {
     #[prost(message, optional, tag = "1")]
     pub member: ::std::option::Option<super::model::MemberData>,
 }
+// GetGuildMemberPresence
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetGuildMemberPresenceRequest {
+    #[prost(fixed64, tag = "1")]
+    pub user_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetGuildMemberPresenceResponse {
+    #[prost(message, optional, tag = "1")]
+    pub presence: ::std::option::Option<super::model::PresenceData>,
+}
 // ListGuildRoles
 
 #[derive(Clone, PartialEq, ::prost::Message)]
