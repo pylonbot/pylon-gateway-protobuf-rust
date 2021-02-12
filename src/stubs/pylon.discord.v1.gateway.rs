@@ -42,6 +42,18 @@ pub mod update_status_request {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateStatusResponse {}
+// FindUser
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindUserRequest {
+    #[prost(fixed64, tag = "1")]
+    pub user_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindUserResponse {
+    #[prost(message, optional, tag = "1")]
+    pub user: ::std::option::Option<super::model::UserData>,
+}
 // FindUserMutualGuilds
 
 #[derive(Clone, PartialEq, ::prost::Message)]
