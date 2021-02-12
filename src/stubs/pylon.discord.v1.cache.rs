@@ -108,18 +108,6 @@ pub struct GetGuildEmojiResponse {
     #[prost(message, optional, tag = "1")]
     pub emoji: ::std::option::Option<super::model::EmojiData>,
 }
-// GetUser
-
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetUserRequest {
-    #[prost(fixed64, tag = "1")]
-    pub user_id: u64,
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetUserResponse {
-    #[prost(message, optional, tag = "1")]
-    pub user: ::std::option::Option<super::model::UserData>,
-}
 // GetGuildMemberVoiceState
 
 #[derive(Clone, PartialEq, ::prost::Message)]
