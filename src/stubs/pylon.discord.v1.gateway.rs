@@ -23,8 +23,8 @@ pub struct UpdateStatusRequest {
     pub since: ::std::option::Option<::prost_types::Timestamp>,
     #[prost(message, repeated, tag = "3")]
     pub activities: ::std::vec::Vec<update_status_request::ActivityData>,
-    #[prost(string, tag = "4")]
-    pub status: std::string::String,
+    #[prost(enumeration = "super::model::presence_data::OnlineStatus", tag = "4")]
+    pub status: i32,
     #[prost(bool, tag = "5")]
     pub afk: bool,
 }
@@ -33,8 +33,11 @@ pub mod update_status_request {
     pub struct ActivityData {
         #[prost(string, tag = "1")]
         pub name: std::string::String,
-        #[prost(uint32, tag = "2")]
-        pub r#type: u32,
+        #[prost(
+            enumeration = "super::super::model::presence_data::presence_activity_data::ActivityType",
+            tag = "2"
+        )]
+        pub r#type: i32,
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
