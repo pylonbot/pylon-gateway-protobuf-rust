@@ -109,7 +109,9 @@ pub mod channel_data {
         pub deny: u64,
     }
     pub mod channel_permission_overwrite_data {
-        #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
         #[repr(i32)]
         pub enum ChannelPermissionOverwriteType {
             Unknown = 0,
@@ -460,7 +462,9 @@ pub mod message_data {
             #[prost(bool, tag = "3")]
             pub inline: bool,
         }
-        #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
         #[repr(i32)]
         pub enum MessageEmbedType {
             Unknown = 0,
@@ -497,8 +501,8 @@ pub mod message_data {
 pub struct PresenceData {
     #[prost(fixed64, tag = "1")]
     pub guild_id: u64,
-    #[prost(string, tag = "4")]
-    pub status: std::string::String,
+    #[prost(enumeration = "presence_data::OnlineStatus", tag = "4")]
+    pub status: i32,
     #[prost(message, optional, tag = "5")]
     pub client_status: ::std::option::Option<presence_data::PresenceClientStatusData>,
     #[prost(message, repeated, tag = "6")]
@@ -520,8 +524,8 @@ pub mod presence_data {
     pub struct PresenceActivityData {
         #[prost(string, tag = "1")]
         pub name: std::string::String,
-        #[prost(uint32, tag = "2")]
-        pub r#type: u32,
+        #[prost(enumeration = "presence_activity_data::ActivityType", tag = "2")]
+        pub r#type: i32,
         #[prost(string, tag = "3")]
         pub url: std::string::String,
         #[prost(message, optional, tag = "4")]
@@ -594,6 +598,29 @@ pub mod presence_data {
             #[prost(string, tag = "3")]
             pub r#match: std::string::String,
         }
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum ActivityType {
+            Unknown = 0,
+            Default = 1,
+            Streaming = 2,
+            Listening = 3,
+            Watching = 4,
+            CustomStatus = 5,
+            Competing = 6,
+        }
+    }
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum OnlineStatus {
+        Unknown = 0,
+        Online = 1,
+        Idle = 2,
+        Dnd = 3,
+        Invisible = 4,
+        Offline = 5,
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum MaybePartialUser {
