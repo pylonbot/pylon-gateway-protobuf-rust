@@ -54,6 +54,24 @@ pub struct GetGuildMemberResponse {
     #[prost(message, optional, tag = "1")]
     pub member: ::std::option::Option<super::model::MemberData>,
 }
+// FindGuildMember
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindGuildMembersRequest {
+    #[prost(message, optional, tag = "1")]
+    pub name: ::std::option::Option<::std::string::String>,
+    #[prost(message, optional, tag = "2")]
+    pub prefix: ::std::option::Option<::std::string::String>,
+    #[prost(enumeration = "super::model::presence_data::OnlineStatus", tag = "3")]
+    pub status: i32,
+    #[prost(uint32, tag = "4")]
+    pub limit: u32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindGuildMembersResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub members: ::std::vec::Vec<super::model::MemberData>,
+}
 // GetGuildMemberPresence
 
 #[derive(Clone, PartialEq, ::prost::Message)]
