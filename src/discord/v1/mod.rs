@@ -1,0 +1,10 @@
+#[path = "../../stubs/pylon.discord.v1.cache.rs"]
+pub mod cache;
+#[path = "../../stubs/pylon.discord.v1.event.rs"]
+pub mod event;
+#[path = "../../stubs/pylon.discord.v1.gateway.rs"]
+pub mod gateway;
+#[path = "../../stubs/pylon.discord.v1.model.rs"]
+pub mod model;
+#[path = "../../stubs/pylon.discord.v1.rest.rs"]
+pub mod rest;
