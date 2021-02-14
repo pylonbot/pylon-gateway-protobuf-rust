@@ -78,3 +78,14 @@ pub struct FindEmojiResponse {
     #[prost(message, optional, tag = "1")]
     pub emoji: ::std::option::Option<super::model::EmojiData>,
 }
+// GetStats
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStatsRequest {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStatsResponse {
+    #[prost(uint64, tag = "1")]
+    pub guild_count: u64,
+    #[prost(uint64, tag = "2")]
+    pub user_count: u64,
+}

@@ -3831,6 +3831,26 @@ pub mod gateway_client {
                 http::uri::PathAndQuery::from_static("/pylon.gateway.v1.service.Gateway/FindEmoji");
             self.inner.unary(request.into_request(), path, codec).await
         }
+        pub async fn get_stats(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::gateway::GetStatsRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::GetStatsResponse>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/pylon.gateway.v1.service.Gateway/GetStats");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
     impl<T: Clone> Clone for GatewayClient<T> {
         fn clone(&self) -> Self {
@@ -3899,6 +3919,15 @@ pub mod gateway_server {
             >,
         ) -> Result<
             tonic::Response<super::super::super::super::discord::v1::gateway::FindEmojiResponse>,
+            tonic::Status,
+        >;
+        async fn get_stats(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::gateway::GetStatsRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::gateway::GetStatsResponse>,
             tonic::Status,
         >;
     }
@@ -4075,6 +4104,44 @@ pub mod gateway_server {
                         let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = FindEmojiSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.Gateway/GetStats" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetStatsSvc<T: Gateway>(pub Arc<T>);
+                    impl<T: Gateway>
+                        tonic::server::UnaryService<
+                            super::super::super::super::discord::v1::gateway::GetStatsRequest,
+                        > for GetStatsSvc<T>
+                    {
+                        type Response =
+                            super::super::super::super::discord::v1::gateway::GetStatsResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::super::super::super::discord::v1::gateway::GetStatsRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).get_stats(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = GetStatsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = if let Some(interceptor) = interceptor {
                             tonic::server::Grpc::with_interceptor(codec, interceptor)
