@@ -2993,6 +2993,28 @@ pub mod gateway_cache_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        #[doc = " GetUser"]
+        pub async fn get_user(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::cache::GetUserRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::cache::GetUserResponse>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayCache/GetUser",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
     impl<T: Clone> Clone for GatewayCacheClient<T> {
         fn clone(&self) -> Self {
@@ -3152,6 +3174,14 @@ pub mod gateway_cache_server {
             tonic::Response<
                 super::super::super::super::discord::v1::cache::ListGuildChannelVoiceStatesResponse,
             >,
+            tonic::Status,
+        >;
+        #[doc = " GetUser"]
+        async fn get_user(
+            &self,
+            request: tonic::Request<super::super::super::super::discord::v1::cache::GetUserRequest>,
+        ) -> Result<
+            tonic::Response<super::super::super::super::discord::v1::cache::GetUserResponse>,
             tonic::Status,
         >;
     }
@@ -3582,6 +3612,44 @@ pub mod gateway_cache_server {
                         let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = ListGuildChannelVoiceStatesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayCache/GetUser" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetUserSvc<T: GatewayCache>(pub Arc<T>);
+                    impl<T: GatewayCache>
+                        tonic::server::UnaryService<
+                            super::super::super::super::discord::v1::cache::GetUserRequest,
+                        > for GetUserSvc<T>
+                    {
+                        type Response =
+                            super::super::super::super::discord::v1::cache::GetUserResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::super::super::super::discord::v1::cache::GetUserRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).get_user(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = GetUserSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = if let Some(interceptor) = interceptor {
                             tonic::server::Grpc::with_interceptor(codec, interceptor)

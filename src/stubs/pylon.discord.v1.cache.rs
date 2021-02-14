@@ -150,3 +150,15 @@ pub struct ListGuildChannelVoiceStatesResponse {
     #[prost(message, repeated, tag = "1")]
     pub voice_states_data: ::std::vec::Vec<super::model::VoiceStateData>,
 }
+// GetUser
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserRequest {
+    #[prost(fixed64, tag = "1")]
+    pub user_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetUserResponse {
+    #[prost(message, optional, tag = "1")]
+    pub user: ::std::option::Option<super::model::UserData>,
+}
