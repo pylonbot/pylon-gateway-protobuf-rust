@@ -88,4 +88,8 @@ pub struct GetStatsResponse {
     pub guild_count: u64,
     #[prost(uint64, tag = "2")]
     pub user_count: u64,
+    #[prost(uint64, tag = "3")]
+    pub member_count: u64,
+    #[prost(uint64, tag = "4")]
+    pub connected_channels: u64,
 }
