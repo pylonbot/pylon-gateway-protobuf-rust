@@ -92,4 +92,6 @@ pub struct GetStatsResponse {
     pub member_count: u64,
     #[prost(uint64, tag = "4")]
     pub connected_channels: u64,
+    #[prost(uint32, tag = "5")]
+    pub shard_count: u32,
 }
