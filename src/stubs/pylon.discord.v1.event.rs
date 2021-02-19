@@ -13,6 +13,8 @@ pub mod event_envelope {
     pub struct HeaderData {
         #[prost(uint64, tag = "1")]
         pub seq: u64,
+        #[prost(message, optional, tag = "2")]
+        pub received_at: ::std::option::Option<::prost_types::Timestamp>,
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EventData {
