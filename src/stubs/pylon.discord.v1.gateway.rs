@@ -18,7 +18,7 @@ pub struct UpdateVoiceStateResponse {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateStatusRequest {
     #[prost(message, optional, tag = "1")]
-    pub shard_id: ::std::option::Option<i32>,
+    pub shard_id: ::std::option::Option<u32>,
     #[prost(message, optional, tag = "2")]
     pub since: ::std::option::Option<::prost_types::Timestamp>,
     #[prost(message, repeated, tag = "3")]
