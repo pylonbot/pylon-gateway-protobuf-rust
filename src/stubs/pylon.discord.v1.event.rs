@@ -112,8 +112,6 @@ pub struct EventScope {
 pub struct ReadyEvent {
     #[prost(message, optional, tag = "1")]
     pub scope: ::std::option::Option<EventScope>,
-    #[prost(bool, tag = "2")]
-    pub init: bool,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeEvent {
