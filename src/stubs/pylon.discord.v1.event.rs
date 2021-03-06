@@ -4,7 +4,7 @@ pub struct EventEnvelope {
     pub header: ::std::option::Option<event_envelope::HeaderData>,
     #[prost(
         oneof = "event_envelope::EventData",
-        tags = "2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37"
+        tags = "2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39"
     )]
     pub event_data: ::std::option::Option<event_envelope::EventData>,
 }
@@ -90,6 +90,10 @@ pub mod event_envelope {
         IntegrationDeleteEvent(super::IntegrationDeleteEvent),
         #[prost(message, tag = "37")]
         InteractionCreateEvent(super::InteractionCreateEvent),
+        #[prost(message, tag = "38")]
+        ReadyEvent(super::ReadyEvent),
+        #[prost(message, tag = "39")]
+        ResumeEvent(super::ResumeEvent),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -103,6 +107,18 @@ pub struct EventScope {
     pub bot_id: u64,
     #[prost(fixed64, tag = "2")]
     pub guild_id: u64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReadyEvent {
+    #[prost(message, optional, tag = "1")]
+    pub scope: ::std::option::Option<EventScope>,
+    #[prost(bool, tag = "2")]
+    pub init: bool,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResumeEvent {
+    #[prost(message, optional, tag = "1")]
+    pub scope: ::std::option::Option<EventScope>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GuildCreateEvent {
