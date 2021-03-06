@@ -64,7 +64,9 @@ pub struct FindGuildMembersRequest {
     pub prefix: ::std::option::Option<::std::string::String>,
     #[prost(enumeration = "super::model::presence_data::OnlineStatus", tag = "3")]
     pub status: i32,
-    #[prost(uint32, tag = "4")]
+    #[prost(message, optional, tag = "4")]
+    pub role_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(uint32, tag = "99")]
     pub limit: u32,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
