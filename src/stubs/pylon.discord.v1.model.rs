@@ -163,6 +163,8 @@ pub struct MemberData {
     pub premium_since: ::std::option::Option<::prost_types::Timestamp>,
     #[prost(uint64, tag = "8")]
     pub permissions: u64,
+    #[prost(message, optional, tag = "9")]
+    pub pending: ::std::option::Option<bool>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RoleData {
