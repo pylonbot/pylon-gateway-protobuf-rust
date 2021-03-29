@@ -130,6 +130,9 @@ pub mod channel_data {
         GuildCategory = 5,
         GuildNews = 6,
         GuildStore = 7,
+        PublicThread = 8,
+        PrivateThread = 9,
+        GuildStageVoice = 10,
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
