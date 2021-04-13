@@ -47,15 +47,13 @@ pub struct WorkerIdentifyRequest {
     pub consumer_group: std::string::String,
     #[prost(string, tag = "3")]
     pub consumer_id: std::string::String,
-    #[prost(uint64, tag = "4")]
-    pub resume_sequence: u64,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerIdentifyResponse {
     #[prost(enumeration = "worker_identify_response::IdentifyStatus", tag = "1")]
     pub status: i32,
-    #[prost(bool, tag = "3")]
-    pub missed_events: bool,
+    #[prost(string, tag = "2")]
+    pub consumer_id: std::string::String,
 }
 pub mod worker_identify_response {
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
