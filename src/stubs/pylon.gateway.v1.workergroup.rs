@@ -1,6 +1,7 @@
+/// Client -> Server messages
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerStreamClientMessage {
-    #[prost(oneof = "worker_stream_client_message::Payload", tags = "1, 2, 3, 4")]
+    #[prost(oneof = "worker_stream_client_message::Payload", tags = "1, 2, 3")]
     pub payload: ::std::option::Option<worker_stream_client_message::Payload>,
 }
 pub mod worker_stream_client_message {
@@ -9,19 +10,15 @@ pub mod worker_stream_client_message {
         #[prost(message, tag = "1")]
         IdentifyRequest(super::WorkerIdentifyRequest),
         #[prost(message, tag = "2")]
-        HeartbeatRequest(super::WorkerHeartbeatRequest),
-        #[prost(message, tag = "3")]
         HeartbeatResponse(super::WorkerHeartbeatResponse),
-        #[prost(message, tag = "4")]
+        #[prost(message, tag = "3")]
         DrainRequest(super::WorkerDrainRequest),
     }
 }
+/// Server -> Client messages
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerStreamServerMessage {
-    #[prost(
-        oneof = "worker_stream_server_message::Payload",
-        tags = "1, 2, 3, 4, 5"
-    )]
+    #[prost(oneof = "worker_stream_server_message::Payload", tags = "1, 2, 3, 4")]
     pub payload: ::std::option::Option<worker_stream_server_message::Payload>,
 }
 pub mod worker_stream_server_message {
@@ -34,11 +31,10 @@ pub mod worker_stream_server_message {
         #[prost(message, tag = "3")]
         HeartbeatRequest(super::WorkerHeartbeatRequest),
         #[prost(message, tag = "4")]
-        HeartbeatResponse(super::WorkerHeartbeatResponse),
-        #[prost(message, tag = "5")]
-        DrainResponse(super::WorkerDrainResponse),
+        StreamClosed(super::WorkerStreamClosed),
     }
 }
+/// Identification is the first message sent
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerIdentifyRequest {
     #[prost(string, tag = "1")]
@@ -47,27 +43,20 @@ pub struct WorkerIdentifyRequest {
     pub consumer_group: std::string::String,
     #[prost(string, tag = "3")]
     pub consumer_id: std::string::String,
+    #[prost(string, tag = "4")]
+    pub router_ticket: std::string::String,
 }
+/// Router tickets are used for robust reconnections
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerIdentifyResponse {
-    #[prost(enumeration = "worker_identify_response::IdentifyStatus", tag = "1")]
-    pub status: i32,
-    #[prost(string, tag = "2")]
-    pub consumer_id: std::string::String,
+    #[prost(string, tag = "1")]
+    pub router_ticket: std::string::String,
 }
-pub mod worker_identify_response {
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-    #[repr(i32)]
-    pub enum IdentifyStatus {
-        Unknown = 0,
-        Ok = 1,
-        Error = 2,
-    }
-}
+/// Heartbeats are used to keep check on clients and acknowledge received events
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerHeartbeatRequest {
     #[prost(uint64, tag = "1")]
-    pub last_sequence: u64,
+    pub sequence: u64,
     #[prost(string, tag = "2")]
     pub nonce: std::string::String,
 }
@@ -76,7 +65,26 @@ pub struct WorkerHeartbeatResponse {
     #[prost(string, tag = "1")]
     pub nonce: std::string::String,
 }
+/// Clients can request to drain their connections
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WorkerDrainRequest {}
+pub struct WorkerDrainRequest {
+    #[prost(uint64, tag = "1")]
+    pub sequence: u64,
+}
+/// The server may close the connection with a reason
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WorkerDrainResponse {}
+pub struct WorkerStreamClosed {
+    #[prost(enumeration = "worker_stream_closed::CloseReason", tag = "1")]
+    pub reason: i32,
+}
+pub mod worker_stream_closed {
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum CloseReason {
+        Unknown = 0,
+        HeartbeatTimeout = 1,
+        InvalidIdentity = 2,
+        DrainComplete = 3,
+        RequestedReconnect = 4,
+    }
+}
