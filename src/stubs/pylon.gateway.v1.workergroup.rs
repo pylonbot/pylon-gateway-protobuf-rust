@@ -10,7 +10,7 @@ pub mod worker_stream_client_message {
         #[prost(message, tag = "1")]
         IdentifyRequest(super::WorkerIdentifyRequest),
         #[prost(message, tag = "2")]
-        HeartbeatResponse(super::WorkerHeartbeatResponse),
+        HeartbeatAck(super::WorkerHeartbeatAck),
         #[prost(message, tag = "3")]
         DrainRequest(super::WorkerDrainRequest),
     }
@@ -55,15 +55,15 @@ pub struct WorkerIdentifyResponse {
 /// Heartbeats are used to keep check on clients and acknowledge received events
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerHeartbeatRequest {
-    #[prost(uint64, tag = "1")]
-    pub sequence: u64,
-    #[prost(string, tag = "2")]
+    #[prost(string, tag = "1")]
     pub nonce: std::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WorkerHeartbeatResponse {
+pub struct WorkerHeartbeatAck {
     #[prost(string, tag = "1")]
     pub nonce: std::string::String,
+    #[prost(uint64, tag = "2")]
+    pub sequence: u64,
 }
 /// Clients can request to drain their connections
 #[derive(Clone, PartialEq, ::prost::Message)]
