@@ -45,6 +45,8 @@ pub struct WorkerIdentifyRequest {
     pub consumer_id: std::string::String,
     #[prost(string, tag = "4")]
     pub router_ticket: std::string::String,
+    #[prost(uint64, tag = "5")]
+    pub last_sequence: u64,
 }
 /// Router tickets are used for robust reconnections
 #[derive(Clone, PartialEq, ::prost::Message)]
