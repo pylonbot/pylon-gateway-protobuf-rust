@@ -856,8 +856,8 @@ pub struct CreateMessageRequest {
     pub allowed_mentions: ::std::option::Option<create_message_request::AllowedMentions>,
     #[prost(message, optional, tag = "7")]
     pub message_reference: ::std::option::Option<create_message_request::MessageReference>,
-    #[prost(message, optional, tag = "8")]
-    pub components: ::std::option::Option<super::model::message_data::MessageComponentData>,
+    #[prost(message, repeated, tag = "8")]
+    pub components: ::std::vec::Vec<super::model::message_data::MessageComponentData>,
     #[prost(message, optional, tag = "99")]
     pub attachment: ::std::option::Option<create_message_request::Attachment>,
 }
