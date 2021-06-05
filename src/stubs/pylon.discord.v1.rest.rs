@@ -855,6 +855,10 @@ pub struct CreateMessageRequest {
     #[prost(message, optional, tag = "6")]
     pub allowed_mentions: ::std::option::Option<create_message_request::AllowedMentions>,
     #[prost(message, optional, tag = "7")]
+    pub message_reference: ::std::option::Option<create_message_request::MessageReference>,
+    #[prost(message, optional, tag = "8")]
+    pub components: ::std::option::Option<super::model::message_data::MessageComponentData>,
+    #[prost(message, optional, tag = "99")]
     pub attachment: ::std::option::Option<create_message_request::Attachment>,
 }
 pub mod create_message_request {
@@ -877,6 +881,17 @@ pub mod create_message_request {
             #[prost(bool, tag = "3")]
             pub everyone: bool,
         }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct MessageReference {
+        #[prost(fixed64, tag = "1")]
+        pub message_id: u64,
+        #[prost(fixed64, tag = "2")]
+        pub channel_id: u64,
+        #[prost(fixed64, tag = "3")]
+        pub guild_id: u64,
+        #[prost(bool, tag = "4")]
+        pub fail_if_not_exists: bool,
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Attachment {
