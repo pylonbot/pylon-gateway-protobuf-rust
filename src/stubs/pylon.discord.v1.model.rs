@@ -284,6 +284,14 @@ pub struct MessageData {
     pub member: ::std::option::Option<MemberData>,
     #[prost(message, optional, tag = "23")]
     pub webhook_id: ::std::option::Option<SnowflakeValue>,
+    #[prost(message, repeated, tag = "24")]
+    pub stickers: ::std::vec::Vec<message_data::MessageStickerData>,
+    #[prost(message, optional, tag = "25")]
+    pub interaction: ::std::option::Option<message_data::MessageInteractionData>,
+    #[prost(message, optional, tag = "26")]
+    pub thread: ::std::option::Option<ChannelData>,
+    #[prost(message, repeated, tag = "27")]
+    pub components: ::std::vec::Vec<message_data::MessageComponentData>,
 }
 pub mod message_data {
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -371,6 +379,112 @@ pub mod message_data {
         pub r#type: i32,
         #[prost(string, tag = "4")]
         pub name: std::string::String,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct MessageStickerData {
+        #[prost(fixed64, tag = "1")]
+        pub id: u64,
+        #[prost(fixed64, tag = "2")]
+        pub pack_id: u64,
+        #[prost(string, tag = "3")]
+        pub name: std::string::String,
+        #[prost(string, tag = "4")]
+        pub description: std::string::String,
+        #[prost(string, tag = "5")]
+        pub tags: std::string::String,
+        #[prost(string, tag = "6")]
+        pub asset: std::string::String,
+        #[prost(
+            enumeration = "message_sticker_data::MessageStickerFormatType",
+            tag = "7"
+        )]
+        pub format_type: i32,
+    }
+    pub mod message_sticker_data {
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum MessageStickerFormatType {
+            Unknown = 0,
+            Png = 1,
+            Apng = 2,
+            Lottie = 3,
+        }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct MessageInteractionData {
+        #[prost(fixed64, tag = "1")]
+        pub id: u64,
+        #[prost(
+            enumeration = "message_interaction_data::MessageInteractionType",
+            tag = "2"
+        )]
+        pub r#type: i32,
+        #[prost(string, tag = "3")]
+        pub name: std::string::String,
+        #[prost(message, optional, tag = "4")]
+        pub user: ::std::option::Option<super::UserData>,
+    }
+    pub mod message_interaction_data {
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum MessageInteractionType {
+            Unknown = 0,
+            Ping = 1,
+            ApplicationCommand = 2,
+            MessageComponent = 3,
+        }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct MessageComponentData {
+        #[prost(
+            enumeration = "message_component_data::MessageComponentType",
+            tag = "1"
+        )]
+        pub r#type: i32,
+        #[prost(
+            enumeration = "message_component_data::MessageComponentButtonStyle",
+            tag = "2"
+        )]
+        pub style: i32,
+        #[prost(string, tag = "3")]
+        pub label: std::string::String,
+        #[prost(message, optional, tag = "4")]
+        pub emoji: ::std::option::Option<MessageReactionEmojiData>,
+        #[prost(string, tag = "5")]
+        pub custom_id: std::string::String,
+        #[prost(string, tag = "6")]
+        pub url: std::string::String,
+        #[prost(bool, tag = "7")]
+        pub disabled: bool,
+        #[prost(message, repeated, tag = "8")]
+        pub components: ::std::vec::Vec<MessageComponentData>,
+    }
+    pub mod message_component_data {
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum MessageComponentType {
+            Unknown = 0,
+            ActionRow = 1,
+            Button = 2,
+        }
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum MessageComponentButtonStyle {
+            UnknownButton = 0,
+            Primary = 1,
+            Secondary = 2,
+            Success = 3,
+            Danger = 4,
+            Link = 5,
+        }
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MessageEmbedData {
