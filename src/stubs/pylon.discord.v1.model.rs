@@ -381,6 +381,26 @@ pub mod message_data {
         pub name: std::string::String,
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct MessageAllowedMentionsData {
+        #[prost(message, optional, tag = "1")]
+        pub parse: ::std::option::Option<message_allowed_mentions_data::AllowedMentionTypes>,
+        #[prost(message, optional, tag = "2")]
+        pub roles: ::std::option::Option<super::SnowflakeListValue>,
+        #[prost(message, optional, tag = "3")]
+        pub users: ::std::option::Option<super::SnowflakeListValue>,
+    }
+    pub mod message_allowed_mentions_data {
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct AllowedMentionTypes {
+            #[prost(bool, tag = "1")]
+            pub roles: bool,
+            #[prost(bool, tag = "2")]
+            pub users: bool,
+            #[prost(bool, tag = "3")]
+            pub everyone: bool,
+        }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MessageStickerData {
         #[prost(fixed64, tag = "1")]
         pub id: u64,
@@ -617,28 +637,31 @@ pub mod message_data {
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ApplicationCommandInteractionData {
+pub struct InteractionDataMessageComponent {
+    #[prost(string, tag = "1")]
+    pub custom_id: std::string::String,
+    #[prost(
+        enumeration = "message_data::message_component_data::MessageComponentType",
+        tag = "2"
+    )]
+    pub component_type: i32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionDataApplicationCommand {
     #[prost(fixed64, tag = "1")]
     pub id: u64,
     #[prost(string, tag = "2")]
     pub name: std::string::String,
     #[prost(message, optional, tag = "3")]
     pub resolved: ::std::option::Option<
-        application_command_interaction_data::ApplicationCommandInteractionDataResolved,
+        interaction_data_application_command::ApplicationCommandInteractionDataResolved,
     >,
     #[prost(message, repeated, tag = "4")]
     pub options: ::std::vec::Vec<
-        application_command_interaction_data::ApplicationCommandInteractionDataOption,
+        interaction_data_application_command::ApplicationCommandInteractionDataOption,
     >,
-    #[prost(string, tag = "5")]
-    pub custom_id: std::string::String,
-    #[prost(
-        enumeration = "message_data::message_component_data::MessageComponentType",
-        tag = "6"
-    )]
-    pub component_type: i32,
 }
-pub mod application_command_interaction_data {
+pub mod interaction_data_application_command {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ApplicationCommandInteractionDataResolved {
         #[prost(message, repeated, tag = "1")]
@@ -907,4 +930,43 @@ pub struct GuildBanData {
     pub reason: std::string::String,
     #[prost(message, optional, tag = "2")]
     pub user: ::std::option::Option<UserData>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionResponse {
+    #[prost(
+        enumeration = "interaction_response::InteractionResponseType",
+        tag = "1"
+    )]
+    pub r#type: i32,
+    #[prost(message, optional, tag = "2")]
+    pub data:
+        ::std::option::Option<interaction_response::InteractionApplicationCommandCallbackData>,
+}
+pub mod interaction_response {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionApplicationCommandCallbackData {
+        #[prost(message, optional, tag = "1")]
+        pub tts: ::std::option::Option<bool>,
+        #[prost(message, optional, tag = "2")]
+        pub content: ::std::option::Option<::std::string::String>,
+        #[prost(message, repeated, tag = "3")]
+        pub embeds: ::std::vec::Vec<super::message_data::MessageEmbedData>,
+        #[prost(message, optional, tag = "4")]
+        pub allowed_mentions:
+            ::std::option::Option<super::message_data::MessageAllowedMentionsData>,
+        #[prost(message, optional, tag = "5")]
+        pub flags: ::std::option::Option<u64>,
+        #[prost(message, repeated, tag = "6")]
+        pub components: ::std::vec::Vec<super::message_data::MessageComponentData>,
+    }
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum InteractionResponseType {
+        Unknown = 0,
+        Pong = 1,
+        ChannelMessageWithSource = 4,
+        DeferredChannelMessageWithSource = 5,
+        DeferredUpdateMessage = 6,
+        UpdateMessage = 7,
+    }
 }

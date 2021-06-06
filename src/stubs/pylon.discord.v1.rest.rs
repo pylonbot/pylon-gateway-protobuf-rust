@@ -853,7 +853,8 @@ pub struct CreateMessageRequest {
     #[prost(message, optional, tag = "5")]
     pub embed: ::std::option::Option<super::model::message_data::MessageEmbedData>,
     #[prost(message, optional, tag = "6")]
-    pub allowed_mentions: ::std::option::Option<create_message_request::AllowedMentions>,
+    pub allowed_mentions:
+        ::std::option::Option<super::model::message_data::MessageAllowedMentionsData>,
     #[prost(message, optional, tag = "7")]
     pub message_reference: ::std::option::Option<create_message_request::MessageReference>,
     #[prost(message, repeated, tag = "8")]
@@ -862,26 +863,6 @@ pub struct CreateMessageRequest {
     pub attachment: ::std::option::Option<create_message_request::Attachment>,
 }
 pub mod create_message_request {
-    #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct AllowedMentions {
-        #[prost(message, optional, tag = "1")]
-        pub parse: ::std::option::Option<allowed_mentions::AllowedMentionTypes>,
-        #[prost(message, optional, tag = "2")]
-        pub roles: ::std::option::Option<super::super::model::SnowflakeListValue>,
-        #[prost(message, optional, tag = "3")]
-        pub users: ::std::option::Option<super::super::model::SnowflakeListValue>,
-    }
-    pub mod allowed_mentions {
-        #[derive(Clone, PartialEq, ::prost::Message)]
-        pub struct AllowedMentionTypes {
-            #[prost(bool, tag = "1")]
-            pub roles: bool,
-            #[prost(bool, tag = "2")]
-            pub users: bool,
-            #[prost(bool, tag = "3")]
-            pub everyone: bool,
-        }
-    }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MessageReference {
         #[prost(fixed64, tag = "1")]
@@ -1674,4 +1655,60 @@ pub mod create_dm_response {
         #[prost(message, tag = "2")]
         Data(Data),
     }
+}
+// Interactions
+
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionResponseCreateRequest {
+    #[prost(message, optional, tag = "1")]
+    pub application_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(string, tag = "2")]
+    pub token: std::string::String,
+    #[prost(message, optional, tag = "3")]
+    pub interaction_response: ::std::option::Option<super::model::InteractionResponse>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionResponseCreateResponse {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageCreateRequest {
+    #[prost(message, optional, tag = "1")]
+    pub application_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(string, tag = "2")]
+    pub token: std::string::String,
+    #[prost(message, optional, tag = "3")]
+    pub message: ::std::option::Option<super::model::MessageData>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageCreateResponse {
+    #[prost(message, optional, tag = "1")]
+    pub message: ::std::option::Option<super::model::MessageData>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageDeleteRequest {
+    #[prost(message, optional, tag = "1")]
+    pub application_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(string, tag = "2")]
+    pub token: std::string::String,
+    /// either @original or a messageId
+    #[prost(string, tag = "3")]
+    pub message_id: std::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageDeleteResponse {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageEditRequest {
+    #[prost(message, optional, tag = "1")]
+    pub application_id: ::std::option::Option<super::model::SnowflakeValue>,
+    #[prost(string, tag = "2")]
+    pub token: std::string::String,
+    /// either @original or a messageId
+    #[prost(string, tag = "3")]
+    pub message_id: std::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub message: ::std::option::Option<super::model::MessageData>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InteractionFollowupMessageEditResponse {
+    #[prost(message, optional, tag = "1")]
+    pub message: ::std::option::Option<super::model::MessageData>,
 }

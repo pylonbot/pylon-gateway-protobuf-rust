@@ -4580,6 +4580,66 @@ pub mod gateway_rest_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        #[doc = " Interactions"]
+        pub async fn create_interaction_response(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::super::super::discord::v1::rest::InteractionResponseCreateRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::InteractionResponseCreateResponse,
+            >,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/CreateInteractionResponse",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }        pub async fn create_interaction_followup_message (& mut self , request : impl tonic :: IntoRequest < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateRequest > ,) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateResponse > , tonic :: Status >{
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/CreateInteractionFollowupMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }        pub async fn edit_interaction_followup_message (& mut self , request : impl tonic :: IntoRequest < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditRequest > ,) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditResponse > , tonic :: Status >{
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/EditInteractionFollowupMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }        pub async fn delete_interaction_followup_message (& mut self , request : impl tonic :: IntoRequest < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteRequest > ,) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteResponse > , tonic :: Status >{
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/pylon.gateway.v1.service.GatewayRest/DeleteInteractionFollowupMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
     impl<T: Clone> Clone for GatewayRestClient<T> {
         fn clone(&self) -> Self {
@@ -5145,6 +5205,21 @@ pub mod gateway_rest_server {
             tonic::Response<super::super::super::super::discord::v1::rest::CreateDmResponse>,
             tonic::Status,
         >;
+        #[doc = " Interactions"]
+        async fn create_interaction_response(
+            &self,
+            request: tonic::Request<
+                super::super::super::super::discord::v1::rest::InteractionResponseCreateRequest,
+            >,
+        ) -> Result<
+            tonic::Response<
+                super::super::super::super::discord::v1::rest::InteractionResponseCreateResponse,
+            >,
+            tonic::Status,
+        >;
+        async fn create_interaction_followup_message (& self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateRequest >) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateResponse > , tonic :: Status > ;
+        async fn edit_interaction_followup_message (& self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditRequest >) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditResponse > , tonic :: Status > ;
+        async fn delete_interaction_followup_message (& self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteRequest >) -> Result < tonic :: Response < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteResponse > , tonic :: Status > ;
     }
     #[derive(Debug)]
     pub struct GatewayRestServer<T: GatewayRest> {
@@ -6823,6 +6898,86 @@ pub mod gateway_rest_server {
                         let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = CreateDmSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/CreateInteractionResponse" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateInteractionResponseSvc<T: GatewayRest>(pub Arc<T>);
+                    impl < T : GatewayRest > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionResponseCreateRequest > for CreateInteractionResponseSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: rest :: InteractionResponseCreateResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionResponseCreateRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . create_interaction_response (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = CreateInteractionResponseSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/CreateInteractionFollowupMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateInteractionFollowupMessageSvc<T: GatewayRest>(pub Arc<T>);
+                    impl < T : GatewayRest > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateRequest > for CreateInteractionFollowupMessageSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageCreateRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . create_interaction_followup_message (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = CreateInteractionFollowupMessageSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/EditInteractionFollowupMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct EditInteractionFollowupMessageSvc<T: GatewayRest>(pub Arc<T>);
+                    impl < T : GatewayRest > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditRequest > for EditInteractionFollowupMessageSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageEditRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . edit_interaction_followup_message (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = EditInteractionFollowupMessageSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = if let Some(interceptor) = interceptor {
+                            tonic::server::Grpc::with_interceptor(codec, interceptor)
+                        } else {
+                            tonic::server::Grpc::new(codec)
+                        };
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/pylon.gateway.v1.service.GatewayRest/DeleteInteractionFollowupMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteInteractionFollowupMessageSvc<T: GatewayRest>(pub Arc<T>);
+                    impl < T : GatewayRest > tonic :: server :: UnaryService < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteRequest > for DeleteInteractionFollowupMessageSvc < T > { type Response = super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteResponse ; type Future = BoxFuture < tonic :: Response < Self :: Response > , tonic :: Status > ; fn call (& mut self , request : tonic :: Request < super :: super :: super :: super :: discord :: v1 :: rest :: InteractionFollowupMessageDeleteRequest >) -> Self :: Future { let inner = self . 0 . clone () ; let fut = async move { (* inner) . delete_interaction_followup_message (request) . await } ; Box :: pin (fut) } }
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let interceptor = inner.1.clone();
+                        let inner = inner.0;
+                        let method = DeleteInteractionFollowupMessageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = if let Some(interceptor) = interceptor {
                             tonic::server::Grpc::with_interceptor(codec, interceptor)
