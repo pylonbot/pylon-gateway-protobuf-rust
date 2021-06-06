@@ -735,8 +735,31 @@ pub struct InteractionCreateEvent {
 pub mod interaction_create_event {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PayloadData {
-        #[prost(sfixed64, tag = "1")]
-        pub guild_id: i64,
+        #[prost(fixed64, tag = "1")]
+        pub id: u64,
+        #[prost(fixed64, tag = "2")]
+        pub application_id: u64,
+        #[prost(
+            enumeration = "super::super::model::message_data::message_interaction_data::MessageInteractionType",
+            tag = "3"
+        )]
+        pub r#type: i32,
+        #[prost(message, optional, tag = "4")]
+        pub data: ::std::option::Option<super::super::model::ApplicationCommandInteractionData>,
+        #[prost(fixed64, tag = "5")]
+        pub guild_id: u64,
+        #[prost(fixed64, tag = "6")]
+        pub channel_id: u64,
+        #[prost(message, optional, tag = "7")]
+        pub member: ::std::option::Option<super::super::model::MemberData>,
+        #[prost(message, optional, tag = "8")]
+        pub user: ::std::option::Option<super::super::model::UserData>,
+        #[prost(string, tag = "9")]
+        pub token: std::string::String,
+        #[prost(uint32, tag = "10")]
+        pub version: u32,
+        #[prost(message, optional, tag = "11")]
+        pub message: ::std::option::Option<super::super::model::MessageData>,
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
