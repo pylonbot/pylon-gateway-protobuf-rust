@@ -617,6 +617,76 @@ pub mod message_data {
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ApplicationCommandInteractionData {
+    #[prost(fixed64, tag = "1")]
+    pub id: u64,
+    #[prost(string, tag = "2")]
+    pub name: std::string::String,
+    #[prost(message, optional, tag = "3")]
+    pub resolved: ::std::option::Option<
+        application_command_interaction_data::ApplicationCommandInteractionDataResolved,
+    >,
+    #[prost(message, repeated, tag = "4")]
+    pub options: ::std::vec::Vec<
+        application_command_interaction_data::ApplicationCommandInteractionDataOption,
+    >,
+    #[prost(string, tag = "5")]
+    pub custom_id: std::string::String,
+    #[prost(
+        enumeration = "message_data::message_component_data::MessageComponentType",
+        tag = "6"
+    )]
+    pub component_type: i32,
+}
+pub mod application_command_interaction_data {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ApplicationCommandInteractionDataResolved {
+        #[prost(message, repeated, tag = "1")]
+        pub users: ::std::vec::Vec<super::UserData>,
+        /// partial! missing user, deaf, mute
+        #[prost(message, repeated, tag = "2")]
+        pub members: ::std::vec::Vec<super::MemberData>,
+        #[prost(message, repeated, tag = "3")]
+        pub roles: ::std::vec::Vec<super::RoleData>,
+        /// partial! missing id, name, type, permissions
+        #[prost(message, repeated, tag = "4")]
+        pub channels: ::std::vec::Vec<super::ChannelData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ApplicationCommandInteractionDataOption {
+        #[prost(string, tag = "1")]
+        pub name: std::string::String,
+        #[prost(
+            enumeration = "application_command_interaction_data_option::ApplicationCommandOptionType",
+            tag = "2"
+        )]
+        pub r#type: i32,
+        /// todo: help it depends on above type I guess?
+        #[prost(string, tag = "3")]
+        pub value: std::string::String,
+        #[prost(message, repeated, tag = "4")]
+        pub options: ::std::vec::Vec<ApplicationCommandInteractionDataOption>,
+    }
+    pub mod application_command_interaction_data_option {
+        #[derive(
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
+        )]
+        #[repr(i32)]
+        pub enum ApplicationCommandOptionType {
+            Unknown = 0,
+            SubCommand = 1,
+            SubCommandGroup = 2,
+            String = 3,
+            Integer = 4,
+            Boolean = 5,
+            User = 6,
+            Channel = 7,
+            Role = 8,
+            Mentionable = 9,
+        }
+    }
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PresenceData {
     #[prost(fixed64, tag = "1")]
     pub guild_id: u64,
