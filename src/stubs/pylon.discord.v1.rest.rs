@@ -1668,7 +1668,22 @@ pub struct InteractionResponseCreateRequest {
     pub interaction_response: ::std::option::Option<super::model::InteractionResponse>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct InteractionResponseCreateResponse {}
+pub struct InteractionResponseCreateResponse {
+    #[prost(
+        oneof = "interaction_response_create_response::Response",
+        tags = "1, 2"
+    )]
+    pub response: ::std::option::Option<interaction_response_create_response::Response>,
+}
+pub mod interaction_response_create_response {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(()),
+    }
+}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionFollowupMessageCreateRequest {
     #[prost(message, optional, tag = "1")]
@@ -1680,8 +1695,25 @@ pub struct InteractionFollowupMessageCreateRequest {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionFollowupMessageCreateResponse {
-    #[prost(message, optional, tag = "1")]
-    pub message: ::std::option::Option<super::model::MessageData>,
+    #[prost(
+        oneof = "interaction_followup_message_create_response::Response",
+        tags = "1, 2"
+    )]
+    pub response: ::std::option::Option<interaction_followup_message_create_response::Response>,
+}
+pub mod interaction_followup_message_create_response {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Data {
+        #[prost(message, optional, tag = "1")]
+        pub message: ::std::option::Option<super::super::model::MessageData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(Data),
+    }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionFollowupMessageDeleteRequest {
@@ -1694,7 +1726,22 @@ pub struct InteractionFollowupMessageDeleteRequest {
     pub message_id: std::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct InteractionFollowupMessageDeleteResponse {}
+pub struct InteractionFollowupMessageDeleteResponse {
+    #[prost(
+        oneof = "interaction_followup_message_delete_response::Response",
+        tags = "1, 2"
+    )]
+    pub response: ::std::option::Option<interaction_followup_message_delete_response::Response>,
+}
+pub mod interaction_followup_message_delete_response {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(()),
+    }
+}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionFollowupMessageEditRequest {
     #[prost(message, optional, tag = "1")]
@@ -1709,6 +1756,23 @@ pub struct InteractionFollowupMessageEditRequest {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionFollowupMessageEditResponse {
-    #[prost(message, optional, tag = "1")]
-    pub message: ::std::option::Option<super::model::MessageData>,
+    #[prost(
+        oneof = "interaction_followup_message_edit_response::Response",
+        tags = "1, 2"
+    )]
+    pub response: ::std::option::Option<interaction_followup_message_edit_response::Response>,
+}
+pub mod interaction_followup_message_edit_response {
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Data {
+        #[prost(message, optional, tag = "1")]
+        pub message: ::std::option::Option<super::super::model::MessageData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1")]
+        Error(super::RestError),
+        #[prost(message, tag = "2")]
+        Data(Data),
+    }
 }
