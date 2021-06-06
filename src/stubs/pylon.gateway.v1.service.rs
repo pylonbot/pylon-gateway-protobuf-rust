@@ -846,7 +846,7 @@ pub mod gateway_dispatch_client {
                 super::super::super::super::discord::v1::event::InteractionCreateEvent,
             >,
         ) -> Result<
-            tonic::Response<super::super::super::super::discord::v1::event::InteractionResponse>,
+            tonic::Response<super::super::super::super::discord::v1::event::EventResponse>,
             tonic::Status,
         > {
             self.inner.ready().await.map_err(|e| {
@@ -1332,7 +1332,7 @@ pub mod gateway_dispatch_server {
                 super::super::super::super::discord::v1::event::InteractionCreateEvent,
             >,
         ) -> Result<
-            tonic::Response<super::super::super::super::discord::v1::event::InteractionResponse>,
+            tonic::Response<super::super::super::super::discord::v1::event::EventResponse>,
             tonic::Status,
         >;
     }
@@ -2607,7 +2607,7 @@ pub mod gateway_dispatch_server {
                         > for InteractionCreateSvc<T>
                     {
                         type Response =
-                            super::super::super::super::discord::v1::event::InteractionResponse;
+                            super::super::super::super::discord::v1::event::EventResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
