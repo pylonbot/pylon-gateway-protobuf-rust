@@ -1661,7 +1661,7 @@ pub mod create_dm_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InteractionResponseCreateRequest {
     #[prost(message, optional, tag = "1")]
-    pub application_id: ::std::option::Option<super::model::SnowflakeValue>,
+    pub interaction_id: ::std::option::Option<super::model::SnowflakeValue>,
     #[prost(string, tag = "2")]
     pub token: std::string::String,
     #[prost(message, optional, tag = "3")]
