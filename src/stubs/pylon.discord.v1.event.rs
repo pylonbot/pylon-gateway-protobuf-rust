@@ -729,40 +729,101 @@ pub mod integration_delete_event {
 pub struct InteractionCreateEvent {
     #[prost(message, optional, tag = "1")]
     pub scope: ::std::option::Option<EventScope>,
-    #[prost(message, optional, tag = "2")]
-    pub payload: ::std::option::Option<interaction_create_event::PayloadData>,
+    #[prost(
+        enumeration = "super::model::message_data::message_interaction_data::MessageInteractionType",
+        tag = "2"
+    )]
+    pub r#type: i32,
+    #[prost(oneof = "interaction_create_event::Payload", tags = "3, 4, 5")]
+    pub payload: ::std::option::Option<interaction_create_event::Payload>,
 }
 pub mod interaction_create_event {
     #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct PayloadData {
+    pub struct InteractionCreatePingEvent {
+        #[prost(message, optional, tag = "1")]
+        pub base: ::std::option::Option<InteractionCreateBasePayload>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionCreateApplicationCommandEvent {
+        #[prost(message, optional, tag = "1")]
+        pub base: ::std::option::Option<InteractionCreateBasePayload>,
+        #[prost(message, optional, tag = "2")]
+        pub data: ::std::option::Option<super::super::model::InteractionDataApplicationCommand>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionCreateMessageComponentEvent {
+        #[prost(message, optional, tag = "1")]
+        pub base: ::std::option::Option<InteractionCreateBasePayload>,
+        #[prost(message, optional, tag = "2")]
+        pub message: ::std::option::Option<super::super::model::MessageData>,
+        #[prost(message, optional, tag = "3")]
+        pub data: ::std::option::Option<super::super::model::InteractionDataMessageComponent>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionCreateBasePayload {
         #[prost(fixed64, tag = "1")]
         pub id: u64,
         #[prost(fixed64, tag = "2")]
         pub application_id: u64,
+        /// dupe, but its there for UX
         #[prost(
             enumeration = "super::super::model::message_data::message_interaction_data::MessageInteractionType",
             tag = "3"
         )]
         pub r#type: i32,
-        #[prost(message, optional, tag = "4")]
-        pub data: ::std::option::Option<super::super::model::ApplicationCommandInteractionData>,
-        #[prost(fixed64, tag = "5")]
-        pub guild_id: u64,
-        #[prost(fixed64, tag = "6")]
+        #[prost(fixed64, tag = "4")]
         pub channel_id: u64,
-        #[prost(message, optional, tag = "7")]
-        pub member: ::std::option::Option<super::super::model::MemberData>,
-        #[prost(message, optional, tag = "8")]
-        pub user: ::std::option::Option<super::super::model::UserData>,
-        #[prost(string, tag = "9")]
+        #[prost(string, tag = "5")]
         pub token: std::string::String,
-        #[prost(uint32, tag = "10")]
+        #[prost(uint32, tag = "6")]
         pub version: u32,
-        #[prost(message, optional, tag = "11")]
-        pub message: ::std::option::Option<super::super::model::MessageData>,
+        #[prost(enumeration = "InteractionCreateBasePayloadType", tag = "7")]
+        pub source_type: i32,
+        #[prost(oneof = "interaction_create_base_payload::SourceData", tags = "8, 9")]
+        pub source_data: ::std::option::Option<interaction_create_base_payload::SourceData>,
+    }
+    pub mod interaction_create_base_payload {
+        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        pub enum SourceData {
+            #[prost(message, tag = "8")]
+            SourceGuild(super::InteractionCreateBasePayloadGuildData),
+            #[prost(message, tag = "9")]
+            SourceDm(super::InteractionCreateBasePayloadDmData),
+        }
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionCreateBasePayloadGuildData {
+        #[prost(fixed64, tag = "1")]
+        pub guild_id: u64,
+        #[prost(message, optional, tag = "2")]
+        pub member: ::std::option::Option<super::super::model::MemberData>,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InteractionCreateBasePayloadDmData {
+        #[prost(message, optional, tag = "1")]
+        pub user: ::std::option::Option<super::super::model::UserData>,
+    }
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum InteractionCreateBasePayloadType {
+        Unknown = 0,
+        Guild = 1,
+        Dm = 2,
+    }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Payload {
+        #[prost(message, tag = "3")]
+        Ping(InteractionCreatePingEvent),
+        #[prost(message, tag = "4")]
+        Command(InteractionCreateApplicationCommandEvent),
+        #[prost(message, tag = "5")]
+        Component(InteractionCreateMessageComponentEvent),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventResponse {}
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct InteractionResponse {}
+pub struct InteractionResponse {
+    #[prost(message, optional, tag = "1")]
+    pub response: ::std::option::Option<super::model::InteractionResponse>,
+}
